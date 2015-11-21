@@ -6,21 +6,49 @@ using System.Threading.Tasks;
 
 namespace PowerPuzzle
 {
-    public class Node : IComparable<Node>
+    public class Node : IComparable<Node>, IEquatable<Node>
     {
         public int _k;
         public List<int> a;
         public List<int> b;
-        private Node Parent;
+        private Node _Parent;
 
         public Node() { }
+        public Node(Node parent) 
+        {
+            _Parent = parent;
+            _k = parent._k;
+            a = new List<int>(parent.a);
+            b = new List<int>(parent.b);
+
+        }
+        private List<int> GetUnusedNumbers()
+        {
+            int _n = (int)Math.Pow(2, _k + 1);
+            List<int> result = new List<int>();
+            for (int i = 0; i < _n; i++)
+            {
+                if(!a.Contains(i) && !b.Contains(i))
+                {
+                    result.Add(i);
+                }
+            }
+            return result;
+        }
         /// <summary>
         /// Returns all valid states that can be reached from this node.
         /// </summary>
         /// <returns></returns>
         public List<Node> GetChildren()
         {
+            int _n = (int)Math.Pow(2, _k + 1);
+            List<int> UnusedNumbers = GetUnusedNumbers();
             List<Node> children = new List<Node>();
+
+            foreach(int n in UnusedNumbers)
+            {
+
+            }
 
             return children;
         }
@@ -86,6 +114,24 @@ namespace PowerPuzzle
             }
             
             return result;
+        }
+        public bool Equals(Node node)
+        {
+            foreach(int i in a)
+            {
+                if(!node.a.Contains(i))
+                {
+                    return false;
+                }
+            }
+            foreach (int i in b)
+            {
+                if (!node.b.Contains(i))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
