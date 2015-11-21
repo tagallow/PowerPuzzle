@@ -11,23 +11,38 @@ namespace PowerPuzzle
         public int _k;
         public List<int> a;
         public List<int> b;
+        private Node Parent;
 
         public Node() { }
+        /// <summary>
+        /// Returns all valid states that can be reached from this node.
+        /// </summary>
+        /// <returns></returns>
+        public List<Node> GetChildren()
+        {
+            List<Node> children = new List<Node>();
 
-        public Node(List<int> a, List<int> b, int _k) 
-        { 
-
+            return children;
         }
 
         public bool IsSovled()
         {
             return SumTest() == 0 && SumPowerTest() == 0;
         }
+        #region sums
+        /// <summary>
+        /// Returns the difference in the regular sums
+        /// </summary>
+        /// <returns></returns>
         private int SumTest()
         {
             Console.WriteLine("SumTest: {0} == {1}", a.Sum(), b.Sum());
             return (int)Math.Abs(a.Sum() - b.Sum());
         }
+        /// <summary>
+        /// Returns the difference in the power sums.
+        /// </summary>
+        /// <returns></returns>
         private int SumPowerTest()
         {
             List<int> a2 = new List<int>();
@@ -42,10 +57,13 @@ namespace PowerPuzzle
             Console.WriteLine("SumPowerTest: {0} == {1}", a2.Sum(), b2.Sum());
             return (int)Math.Abs(a2.Sum() - b2.Sum());
         }
-
+        #endregion
+        /// <summary>
+        /// Smaller is better
+        /// </summary>
+        /// <returns></returns>
         public int Heuristic()
         {
-            //return _k;
             return SumTest() + SumPowerTest();
         }
 
