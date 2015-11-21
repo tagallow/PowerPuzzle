@@ -8,7 +8,7 @@ namespace PowerPuzzle
 {
     public class Node : IComparable<Node>
     {
-        private int _k;
+        public int _k;
         public List<int> a;
         public List<int> b;
 
@@ -45,6 +45,7 @@ namespace PowerPuzzle
 
         public int Heuristic()
         {
+            //return _k;
             return SumTest() + SumPowerTest();
         }
 
@@ -57,15 +58,15 @@ namespace PowerPuzzle
         {
             int result = 0;
 
-            if(this.Heuristic() > node.Heuristic())
+            if (this.Heuristic() > node.Heuristic())
             {
                 result = 1;
             }
-            else if(this.Heuristic() < node.Heuristic())
+            else if (this.Heuristic() < node.Heuristic())
             {
                 result = -1;
             }
-
+            
             return result;
         }
     }
