@@ -11,7 +11,7 @@ namespace PowerPuzzle
         public int _k { get; set; }
         public List<int> a { get; set; }
         public List<int> b { get; set; }
-        private Node _Parent;
+        //private Node _Parent;
 
         public Node() { }
         /// <summary>
@@ -20,7 +20,7 @@ namespace PowerPuzzle
         /// <param name="parent"></param>
         public Node(Node parent) 
         {
-            _Parent = parent;
+            //_Parent = parent;
             _k = parent._k;
             a = new List<int>(parent.a);
             b = new List<int>(parent.b);
