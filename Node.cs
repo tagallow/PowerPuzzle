@@ -147,21 +147,53 @@ namespace PowerPuzzle
         }
         public bool Equals(Node node)
         {
+            bool isEqual = true;
             foreach(int i in a)
             {
                 if(!node.a.Contains(i))
                 {
-                    return false;
+                    isEqual = false;
+                    break;
                 }
             }
-            foreach (int i in b)
+            if (isEqual)
             {
-                if (!node.b.Contains(i))
+                foreach (int i in b)
                 {
-                    return false;
+                    if (!node.b.Contains(i))
+                    {
+                        isEqual = false;
+                        break;
+                    }
                 }
             }
-            return true;
+            //nodes are also equal in a mirror situation, where b==a AND a==b
+            if(!isEqual)
+            {
+                isEqual = true;
+                foreach (int i in a)
+                {
+                    if (!node.b.Contains(i))
+                    {
+                        isEqual = false;
+                        break;
+                    }
+                }
+                if (isEqual)
+                {
+                    foreach (int i in b)
+                    {
+                        if (!node.a.Contains(i))
+                        {
+                            isEqual = false;
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            return isEqual;
         }
     }
 }

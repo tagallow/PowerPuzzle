@@ -18,7 +18,7 @@ namespace PowerPuzzle
             Stack<Node> stack = new Stack<Node>();
             List<Node> Solutions = new List<Node>();
             //HashSet<Node> CheckedNodes = new HashSet<Node>();
-            Node FirstNode = new Node() { _k = 3, a = new List<int>(), b = new List<int>() };
+            Node FirstNode = new Node() { _k = 4, a = new List<int>(), b = new List<int>() };
             stack.Push(FirstNode);
             timer.Start();
             while (stack.Count > 0)
@@ -41,7 +41,8 @@ namespace PowerPuzzle
                     {
                         if (!stack.Contains(childNode))
                         {
-                            stack.Push(childNode);
+                            //if(!CheckedNodes.Contains(childNode))
+                                stack.Push(childNode);
                         }
                     }
                 }
