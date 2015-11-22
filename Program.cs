@@ -14,31 +14,34 @@ namespace PowerPuzzle
         static void Main(string[] args)
         {
             Stopwatch timer = new Stopwatch();
-            RandomMeldablePriorityQueue<Node> q = new RandomMeldablePriorityQueue<Node>();
-            HashSet<Node> CheckedNodes = new HashSet<Node>();
-            Node FirstNode = new Node() { _k = 2, a = new List<int>(), b = new List<int>() };
-            q.Add(FirstNode);
+            //RandomMeldablePriorityQueue<Node> q = new RandomMeldablePriorityQueue<Node>();
+            Stack<Node> stack = new Stack<Node>();
+            List<Node> Solutions = new List<Node>();
+            //HashSet<Node> CheckedNodes = new HashSet<Node>();
+            Node FirstNode = new Node() { _k = 3, a = new List<int>(), b = new List<int>() };
+            stack.Push(FirstNode);
             timer.Start();
-            while (q.Count > 0)
+            while (stack.Count > 0)
             {
-                Node node = q.Dequeue();
-                if (node.IsSovled())
+                Node node = stack.Pop();
+                if (node.IsSovled() && !Solutions.Contains(node))
                 {
                     timer.Stop();
-                    Console.WriteLine("===SOLVED===");
+                    Console.WriteLine("===SOLUTION FOUND===");
                     node.PrintArrays();
-                    Console.WriteLine("{0:0,000} nodes checked", CheckedNodes.Count);
+                    //Console.WriteLine("{0:0,000} nodes checked", CheckedNodes.Count);
                     Console.WriteLine("Time: {0}", timer.Elapsed.ToString());
-                    break;
+                    Solutions.Add(node);
+                    //break;
                 }
                 else
                 {
-                    CheckedNodes.Add(node);
+                    //CheckedNodes.Add(node);
                     foreach(Node childNode in node.GetChildren())
                     {
-                        if (!q.Contains(childNode) && !CheckedNodes.Contains(childNode))
+                        if (!stack.Contains(childNode))
                         {
-                            q.Add(childNode);
+                            stack.Push(childNode);
                         }
                     }
                 }
