@@ -16,7 +16,7 @@ namespace PowerPuzzle
             Stopwatch timer = new Stopwatch();
             RandomMeldablePriorityQueue<Node> q = new RandomMeldablePriorityQueue<Node>();
             HashSet<Node> CheckedNodes = new HashSet<Node>();
-            Node FirstNode = new Node() { _k = 3, a = new List<int>(), b = new List<int>() };
+            Node FirstNode = new Node() { _k = 2, a = new List<int>(), b = new List<int>() };
             q.Add(FirstNode);
             timer.Start();
             while (q.Count > 0)
@@ -27,6 +27,7 @@ namespace PowerPuzzle
                     timer.Stop();
                     Console.WriteLine("===SOLVED===");
                     node.PrintArrays();
+                    Console.WriteLine("{0:0,000} nodes checked", CheckedNodes.Count);
                     Console.WriteLine("Time: {0}", timer.Elapsed.ToString());
                     break;
                 }
