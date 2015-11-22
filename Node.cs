@@ -8,12 +8,16 @@ namespace PowerPuzzle
 {
     public class Node : IComparable<Node>, IEquatable<Node>
     {
-        public int _k;
-        public List<int> a;
-        public List<int> b;
+        public int _k { get; set; }
+        public List<int> a { get; set; }
+        public List<int> b { get; set; }
         private Node _Parent;
 
         public Node() { }
+        /// <summary>
+        /// Each child node will start as a clone of the parent
+        /// </summary>
+        /// <param name="parent"></param>
         public Node(Node parent) 
         {
             _Parent = parent;
@@ -47,7 +51,13 @@ namespace PowerPuzzle
 
             foreach(int n in UnusedNumbers)
             {
+                Node newNode = new Node(this);
+                newNode.a.Add(n);
+                children.Add(newNode);
 
+                newNode = new Node(this);
+                newNode.b.Add(n);
+                children.Add(newNode);
             }
 
             return children;
@@ -55,7 +65,22 @@ namespace PowerPuzzle
 
         public bool IsSovled()
         {
-            return SumTest() == 0 && SumPowerTest() == 0;
+            if (GetUnusedNumbers().Count == 0)
+            {
+                if(SumTest() == 0 && SumPowerTest() == 0)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
         #region sums
         /// <summary>
@@ -64,7 +89,7 @@ namespace PowerPuzzle
         /// <returns></returns>
         private int SumTest()
         {
-            Console.WriteLine("SumTest: {0} == {1}", a.Sum(), b.Sum());
+            //Console.WriteLine("SumTest: {0} == {1}", a.Sum(), b.Sum());
             return (int)Math.Abs(a.Sum() - b.Sum());
         }
         /// <summary>
@@ -82,7 +107,7 @@ namespace PowerPuzzle
             foreach (int n in b)
                 b2.Add((int)Math.Pow(n, _k));
 
-            Console.WriteLine("SumPowerTest: {0} == {1}", a2.Sum(), b2.Sum());
+            //Console.WriteLine("SumPowerTest: {0} == {1}", a2.Sum(), b2.Sum());
             return (int)Math.Abs(a2.Sum() - b2.Sum());
         }
         #endregion
@@ -92,7 +117,12 @@ namespace PowerPuzzle
         /// <returns></returns>
         public int Heuristic()
         {
-            return SumTest() + SumPowerTest();
+            int result = SumTest() + SumPowerTest();
+            if(GetUnusedNumbers().Count>0)
+            {
+                result += 500;
+            }
+            return result;
         }
 
         public void PrintArrays()

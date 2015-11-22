@@ -13,18 +13,27 @@ namespace PowerPuzzle
         static void Main(string[] args)
         {
             RandomMeldablePriorityQueue<Node> q = new RandomMeldablePriorityQueue<Node>();
-            Node n1 = new Node() { _k = 0 };
-            Node n2 = new Node() { _k = 3 };
-            Node n3 = new Node() { _k = 1 };
+            Node FirstNode = new Node() { _k = 3, a = new List<int>(), b = new List<int>() };
+            q.Add(FirstNode);
+            while (q.Count > 0)
+            {
+                Node node = q.Dequeue();
+                if (node.IsSovled())
+                {
+                    Console.WriteLine("===SOLVED===");
+                    node.PrintArrays();
+                    break;
+                }
+                else
+                {
+                    foreach(Node childNode in node.GetChildren())
+                    {
+                        q.Add(childNode);
+                    }
+                }
+            }
 
-            q.Add(n1);
-            q.Add(n2);
-            q.Add(n3);
-
-            Console.WriteLine(q.Dequeue()._k);
-            Console.WriteLine(q.Dequeue()._k);
-            Console.WriteLine(q.Dequeue()._k);
-
+            Console.WriteLine("Done");
             Console.ReadKey();
 
         }
