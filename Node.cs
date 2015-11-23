@@ -25,7 +25,7 @@ namespace PowerPuzzle
             _k = parent._k;
             a = new List<int>(parent.a);
             b = new List<int>(parent.b);
-            Cost = parent.Cost + 1;
+            Cost = 0;//parent.Cost + 1;
 
         }
         private List<int> GetUnusedNumbers()
@@ -119,7 +119,7 @@ namespace PowerPuzzle
         /// <returns></returns>
         public int Heuristic()
         {
-            int result = GetUnusedNumbers().Count;
+            int result = GetUnusedNumbers().Count+SumTest();
             return result;
         }
 
