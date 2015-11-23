@@ -67,22 +67,14 @@ namespace PowerPuzzle
 
         public bool IsSovled()
         {
-            if (GetUnusedNumbers().Count == 0 && a.Count == b.Count)
+            if (GetUnusedNumbers().Count == 0 && 
+                a.Count == b.Count &&
+                SumTest() == 0 && 
+                SumPowerTest() == 0)
             {
-                if(SumTest() == 0 && SumPowerTest() == 0)
-                {
-
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         #region sums
         /// <summary>
