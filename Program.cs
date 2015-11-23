@@ -40,8 +40,6 @@ namespace PowerPuzzle
             int nodeCount = 0;
             Stopwatch timer = new Stopwatch();
             RandomMeldablePriorityQueue<Node> q = new RandomMeldablePriorityQueue<Node>();
-            //Stack<Node> q = new Stack<Node>();
-            List<Node> Solutions = new List<Node>();
             HashSet<Node> CheckedNodes = new HashSet<Node>();
             Node FirstNode = new Node() { _k = _k, a = new List<int>(), b = new List<int>(), Cost = 0 };
             q.Add(FirstNode);
@@ -50,20 +48,17 @@ namespace PowerPuzzle
             {
                 Node node = q.Dequeue();
                 nodeCount++;
-                if (node.IsSovled() && !Solutions.Contains(node))
+                if (node.IsSovled())
                 {
                     //timer.Stop();
                     Console.WriteLine("===SOLUTION FOUND===");
                     node.PrintArrays();
                     Console.WriteLine("{0:0,000} nodes checked", nodeCount);
                     Console.WriteLine("Time: {0}", timer.Elapsed.ToString());
-                    Solutions.Add(node);
-                    //break;
+                    break;
                 }
                 else
                 {
-
-
                     foreach (Node childNode in node.GetChildren())
                     {
                         if (!q.Contains(childNode))
