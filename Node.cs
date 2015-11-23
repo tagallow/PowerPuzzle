@@ -9,6 +9,7 @@ namespace PowerPuzzle
     public class Node : IComparable<Node>, IEquatable<Node>
     {
         public int _k { get; set; }
+        public int Cost { get; set; }
         public List<int> a { get; set; }
         public List<int> b { get; set; }
         //private Node _Parent;
@@ -24,6 +25,7 @@ namespace PowerPuzzle
             _k = parent._k;
             a = new List<int>(parent.a);
             b = new List<int>(parent.b);
+            Cost = parent.Cost + 1;
 
         }
         private List<int> GetUnusedNumbers()
@@ -65,7 +67,7 @@ namespace PowerPuzzle
 
         public bool IsSovled()
         {
-            if (GetUnusedNumbers().Count == 0)
+            if (GetUnusedNumbers().Count == 0 && a.Count == b.Count)
             {
                 if(SumTest() == 0 && SumPowerTest() == 0)
                 {
@@ -117,11 +119,7 @@ namespace PowerPuzzle
         /// <returns></returns>
         public int Heuristic()
         {
-            int result = SumTest() + SumPowerTest();
-            if(GetUnusedNumbers().Count>0)
-            {
-                result += 500;
-            }
+            int result = GetUnusedNumbers().Count;
             return result;
         }
 
@@ -134,11 +132,11 @@ namespace PowerPuzzle
         {
             int result = 0;
 
-            if (this.Heuristic() > node.Heuristic())
+            if (this.Heuristic()+Cost > node.Heuristic()+node.Cost)
             {
                 result = 1;
             }
-            else if (this.Heuristic() < node.Heuristic())
+            else if (this.Heuristic()+Cost < node.Heuristic()+node.Cost)
             {
                 result = -1;
             }
