@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PowerPuzzle
 {
-    public class Node : IComparable<Node>, IEquatable<Node>
+    public class Node : IEquatable<Node>
     {
         public int _k { get; set; }
         public int Cost { get; set; }
@@ -128,21 +128,7 @@ namespace PowerPuzzle
             Console.WriteLine(String.Join(", ", a.ToArray()));
             Console.WriteLine(String.Join(", ", b.ToArray()));
         }
-        public int CompareTo(Node node)
-        {
-            int result = 0;
-
-            if (this.Heuristic()+Cost > node.Heuristic()+node.Cost)
-            {
-                result = 1;
-            }
-            else if (this.Heuristic()+Cost < node.Heuristic()+node.Cost)
-            {
-                result = -1;
-            }
-            
-            return result;
-        }
+        
         public bool Equals(Node node)
         {
             bool isEqual = true;
