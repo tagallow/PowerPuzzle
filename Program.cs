@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-
 
 namespace PowerPuzzle
 {
@@ -26,7 +22,7 @@ namespace PowerPuzzle
 
             for (int i = 0; i < _n; i++)
             {
-                if(seq.ToCharArray()[i]=='a')
+                if (seq.ToCharArray()[i] == 'a')
                 {
                     a.Add(i);
                 }
@@ -37,7 +33,7 @@ namespace PowerPuzzle
             }
             Console.WriteLine(String.Join(", ", a.ToArray()));
             Console.WriteLine(String.Join(", ", b.ToArray()));
-            if(IsSolved(a,b,_k))
+            if (IsSolved(a, b, _k))
             {
                 Console.WriteLine("correct");
             }
@@ -48,7 +44,6 @@ namespace PowerPuzzle
 
             Console.WriteLine("Done");
             Console.ReadKey();
-
         }
 
         private static string FairShareSequence(int n)
