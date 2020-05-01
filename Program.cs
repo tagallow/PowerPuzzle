@@ -43,7 +43,6 @@ namespace PowerPuzzle
             }
 
             Console.WriteLine("Done");
-            Console.ReadKey();
         }
 
         private static string FairShareSequence(int n)
